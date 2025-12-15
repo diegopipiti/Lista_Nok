@@ -56,20 +56,20 @@
   {
     "id": "a244d803e3a94889b51e62773f93811f",
     "title": "Bonnie e Clyde all'italiana",
-    "status": "downloading",
+    "status": "downloaded",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-15T08:19:25.742Z"
+    "updatedAt": "2025-12-15T13:54:22.847Z"
   },
   {
     "id": "ddc294578dc7417e95631a2dc6420902",
     "title": "Cado dalle nubi",
-    "status": "downloading",
+    "status": "downloaded",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-15T08:17:09.650Z"
+    "updatedAt": "2025-12-15T14:29:09.843Z"
   },
   {
     "id": "2669ddc04af8432f809854c07bc7da37",
@@ -182,10 +182,28 @@
   {
     "id": "aaaac44da8a749f3aa5b87527f05d4e6",
     "title": "Dredd - la legge sono io",
-    "status": "downloading",
+    "status": "downloaded",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-15T08:15:26.386Z"
+    "updatedAt": "2025-12-15T13:54:29.801Z"
+  },
+  {
+    "id": "d1b0fc8604e742a6a6094dc96e8a5d63",
+    "title": "Dungeons & Dragons - L'onore dei ladri",
+    "status": "downloading",
+    "torrent": "1080p",
+    "streaming": "--",
+    "notes": "Circa 3 giga",
+    "updatedAt": "2025-12-15T14:50:50.271Z"
+  },
+  {
+    "id": "0be254613bca4c72a536dbd8bc2e395f",
+    "title": "Drive-Away Dolls",
+    "status": "downloaded",
+    "torrent": "1080p",
+    "streaming": "--",
+    "notes": "Molto basso, circa 1.5 giga. Da verificare una volta scaricato",
+    "updatedAt": "2025-12-15T16:19:19.332Z"
   }
 ]
