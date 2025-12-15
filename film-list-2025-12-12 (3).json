@@ -38,38 +38,38 @@
   {
     "id": "604cd3a1281a49108bc0797185dd5bc7",
     "title": "Basta vincere",
-    "status": "todo",
+    "status": "downloading",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:06:50.504Z"
+    "updatedAt": "2025-12-15T08:13:08.732Z"
   },
   {
     "id": "1335e9629f154d8cbc13814d0f353248",
     "title": "Benvenuto presidente",
     "status": "todo",
-    "torrent": "da verificare",
+    "torrent": "Non trovato",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:06:57.873Z"
+    "updatedAt": "2025-12-15T08:18:20.348Z"
   },
   {
     "id": "a244d803e3a94889b51e62773f93811f",
     "title": "Bonnie e Clyde all'italiana",
-    "status": "todo",
+    "status": "downloading",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:07:07.176Z"
+    "updatedAt": "2025-12-15T08:19:25.742Z"
   },
   {
     "id": "ddc294578dc7417e95631a2dc6420902",
     "title": "Cado dalle nubi",
-    "status": "todo",
+    "status": "downloading",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:07:13.057Z"
+    "updatedAt": "2025-12-15T08:17:09.650Z"
   },
   {
     "id": "2669ddc04af8432f809854c07bc7da37",
@@ -83,11 +83,11 @@
   {
     "id": "32b0f48409b14041a5574a49bc91f539",
     "title": "cella 211",
-    "status": "todo",
+    "status": "downloading",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:07:24.626Z"
+    "updatedAt": "2025-12-15T08:14:21.752Z"
   },
   {
     "id": "7c56421fc87d4dd7aeda51acf3cdcf80",
@@ -155,11 +155,11 @@
   {
     "id": "c20a8ad3f96042b4b2fc221cc03af233",
     "title": "The Nice Guys",
-    "status": "downloading",
+    "status": "downloaded",
     "torrent": "2160p",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T10:19:24.521Z"
+    "updatedAt": "2025-12-15T08:08:33.696Z"
   },
   {
     "id": "d124561395534c1fa7f561bb38d92c60",
@@ -182,10 +182,10 @@
   {
     "id": "aaaac44da8a749f3aa5b87527f05d4e6",
     "title": "Dredd - la legge sono io",
-    "status": "todo",
+    "status": "downloading",
     "torrent": "da verificare",
     "streaming": "--",
     "notes": "",
-    "updatedAt": "2025-12-12T21:39:10.975Z"
+    "updatedAt": "2025-12-15T08:15:26.386Z"
   }
 ]
