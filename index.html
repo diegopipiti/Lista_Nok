@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista film da scaricare</title>
+  <style>
+    :root{
+      --bg:#0b0f17; --card:#111827; --muted:#94a3b8; --text:#e5e7eb;
+      --border:#1f2937; --accent:#22c55e; --danger:#ef4444; --warn:#f59e0b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 0%, rgba(34,197,94,.18), transparent 50%),
+                  radial-gradient(900px 600px at 90% 30%, rgba(245,158,11,.16), transparent 55%),
+                  var(--bg);
+    }
+    a{color:#93c5fd; text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1100px; margin:0 auto; padding:24px 16px 48px}
+    header{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .title{display:flex; flex-direction:column; gap:6px}
+    h1{margin:0; font-size:22px; letter-spacing:.2px}
+    .subtitle{color:var(--muted); font-size:13px; line-height:1.35}
+
+    .toolbar{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      background:rgba(17,24,39,.7);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:12px;
+      box-shadow: var(--shadow);
+    }
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field label{font-size:11px; color:var(--muted)}
+    input, select, textarea{
+      background:#0f172a; color:var(--text);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+      min-width: 190px;
+    }
+    textarea{min-width: 260px; resize:vertical}
+    input:focus, select:focus, textarea:focus{border-color:rgba(147,197,253,.8); box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+
+    .btn{
+      border:1px solid var(--border);
+      background:#0f172a;
+      color:var(--text);
+      border-radius:14px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:14px;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    .btn:hover{border-color:rgba(148,163,184,.65)}
+    .btn.primary{background:rgba(34,197,94,.14); border-color:rgba(34,197,94,.35)}
+    .btn.primary:hover{border-color:rgba(34,197,94,.75)}
+    .btn.danger{background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.35)}
+    .btn.danger:hover{border-color:rgba(239,68,68,.75)}
+    .btn.ghost{background:transparent}
+
+    .card{
+      background:rgba(17,24,39,.7);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .tableWrap{overflow:auto}
+    table{width:100%; border-collapse:separate; border-spacing:0}
+    thead th{
+      position:sticky; top:0;
+      background:rgba(15,23,42,.95);
+      border-bottom:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+      font-size:12px;
+      color:var(--muted);
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    thead th.sorting{color:#e2e8f0}
+    tbody td{
+      padding:12px;
+      border-bottom:1px solid rgba(31,41,55,.7);
+      vertical-align:top;
+      font-size:14px;
+    }
+    tbody tr:hover{background:rgba(148,163,184,.06)}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .dot{width:8px; height:8px; border-radius:999px; display:inline-block}
+    .s-downloaded{background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.35)}
+    .s-downloaded .dot{background:var(--accent)}
+    .s-downloading{background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35)}
+    .s-downloading .dot{background:var(--warn)}
+    .s-todo{background:rgba(148,163,184,.10); border-color:rgba(148,163,184,.22)}
+    .s-todo .dot{background:#94a3b8}
+
+    .mono{font-family:var(--mono); font-size:12px; color:#cbd5e1; word-break:break-all}
+
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+
+    /* Mobile cards */
+    .mobileList{display:none; padding:12px}
+    .mItem{border:1px solid rgba(31,41,55,.7); border-radius:16px; padding:12px; background:rgba(15,23,42,.6)}
+    .mItem + .mItem{margin-top:10px}
+    .mRow{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+    .mTitle{font-weight:800; font-size:16px; margin:0}
+    .mMeta{color:var(--muted); font-size:12px; margin-top:6px; line-height:1.35}
+
+    @media (max-width: 860px){
+      .tableWrap{display:none}
+      .mobileList{display:block}
+      input, select, textarea{min-width: 160px}
+    }
+
+    /* Modal */
+    dialog{
+      border:none;
+      padding:0;
+      width:min(720px, 96vw);
+      background:transparent;
+    }
+    dialog::backdrop{background:rgba(0,0,0,.55)}
+    .modal{
+      background:rgba(17,24,39,.92);
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modal header{
+      padding:14px 16px;
+      margin:0;
+      border-bottom:1px solid rgba(31,41,55,.7);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .modal header h2{margin:0; font-size:16px}
+    .modal .content{padding:16px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .grid .full{grid-column:1 / -1}
+    .modal footer{
+      padding:14px 16px;
+      border-top:1px solid rgba(31,41,55,.7);
+      display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;
+    }
+    @media (max-width: 700px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .empty{
+      padding:18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hint{color:var(--muted); font-size:12px; margin-top:8px; line-height:1.35}
+
+    .chipBar{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .small{font-size:12px; color:var(--muted)}
+
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>📥 Lista film da scaricare</h1>
+        <div class="subtitle">CRUD + ordinamento + filtri. I dati restano sul dispositivo (LocalStorage) e funzionano offline.</div>
+      </div>
+
+      <div class="toolbar" role="region" aria-label="Controlli">
+        <div class="field">
+          <label for="q">Cerca</label>
+          <input id="q" type="search" placeholder="Titolo / note / link…" />
+        </div>
+        <div class="field">
+          <label for="statusFilter">Stato</label>
+          <select id="statusFilter">
+            <option value="">Tutti</option>
+            <option value="downloaded">Scaricato</option>
+            <option value="downloading">In download</option>
+            <option value="todo">Da scaricare</option>
+          </select>
+        </div>
+        <button class="btn primary" id="addBtn" type="button">➕ Aggiungi</button>
+        <button class="btn ghost" id="exportBtn" type="button" title="Esporta JSON">⬇️ Export</button>
+        <button class="btn ghost" id="importBtn" type="button" title="Importa JSON">⬆️ Import</button>
+      </div>
+    </header>
+
+    <section class="card" aria-label="Lista">
+      <div class="tableWrap" role="region" aria-label="Tabella film">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="title">Titolo</th>
+              <th data-key="status">Stato</th>
+              <th data-key="torrent">Torrent</th>
+              <th data-key="streaming">Streaming</th>
+              <th data-key="notes">Note</th>
+              <th data-key="updatedAt">Aggiornato</th>
+              <th class="sr-only">Azioni</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="mobileList" id="mobileList" aria-label="Lista mobile"></div>
+
+      <div class="empty" id="empty" style="display:none">Nessun elemento. Premi <b>Aggiungi</b> per inserire il primo film.</div>
+
+      <div style="padding:12px 16px">
+        <div class="chipBar">
+          <span class="small" id="countLabel">0 elementi</span>
+          <span class="small" id="sortLabel">Ordine: titolo ↑</span>
+          <span class="small">Suggerimento: clicca sull’intestazione di una colonna per ordinare.</span>
+        </div>
+      </div>
+    </section>
+
+    <p class="hint">Se vuoi usarla da telefono: salva questo file come <span class="mono">index.html</span> e aprilo dal browser, oppure mettilo su GitHub Pages / un hosting. Funziona anche come pagina offline (i dati sono locali).</p>
+  </div>
+
+  <!-- MODAL ADD/EDIT -->
+  <dialog id="editor">
+    <div class="modal">
+      <header>
+        <h2 id="modalTitle">Aggiungi film</h2>
+        <button class="btn ghost" id="closeModal" type="button">✕</button>
+      </header>
+      <form class="content" id="form">
+        <input type="hidden" id="id" />
+        <div class="grid">
+          <div class="field full">
+            <label for="title">Titolo *</label>
+            <input id="title" required placeholder="Es. Underworld" />
+          </div>
+
+          <div class="field">
+            <label for="status">Stato</label>
+            <select id="status">
+              <option value="todo">Da scaricare</option>
+              <option value="downloading">In download</option>
+              <option value="downloaded">Scaricato</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="torrent">Torrent (magnet/link/file)</label>
+            <input id="torrent" placeholder="magnet:?xt=urn:btih:… oppure https://…" />
+          </div>
+
+          <div class="field full">
+            <label for="streaming">Siti di streaming (uno o più link separati da spazio/virgola)</label>
+            <input id="streaming" placeholder="https://… , https://…" />
+          </div>
+
+          <div class="field full">
+            <label for="notes">Note</label>
+            <textarea id="notes" rows="4" placeholder="Qualità, lingua, stagioni, ecc."></textarea>
+          </div>
+        </div>
+      </form>
+      <footer>
+        <button class="btn" id="cancelBtn" type="button">Annulla</button>
+        <button class="btn primary" id="saveBtn" type="button">Salva</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- Hidden file input for import -->
+  <input id="fileInput" type="file" accept="application/json" style="display:none" />
+
+  <script>
+    /**
+     * Simple offline-first CRUD list using LocalStorage.
+     * Data schema:
+     * { id, title, status, torrent, streaming, notes, updatedAt }
+     */
+
+    const STORAGE_KEY = 'film_list_v1';
+
+    const els = {
+      q: document.getElementById('q'),
+      statusFilter: document.getElementById('statusFilter'),
+      tbody: document.getElementById('tbody'),
+      mobileList: document.getElementById('mobileList'),
+      empty: document.getElementById('empty'),
+      countLabel: document.getElementById('countLabel'),
+      sortLabel: document.getElementById('sortLabel'),
+      addBtn: document.getElementById('addBtn'),
+      exportBtn: document.getElementById('exportBtn'),
+      importBtn: document.getElementById('importBtn'),
+      fileInput: document.getElementById('fileInput'),
+      editor: document.getElementById('editor'),
+      modalTitle: document.getElementById('modalTitle'),
+      closeModal: document.getElementById('closeModal'),
+      cancelBtn: document.getElementById('cancelBtn'),
+      saveBtn: document.getElementById('saveBtn'),
+      form: document.getElementById('form'),
+      id: document.getElementById('id'),
+      title: document.getElementById('title'),
+      status: document.getElementById('status'),
+      torrent: document.getElementById('torrent'),
+      streaming: document.getElementById('streaming'),
+      notes: document.getElementById('notes'),
+    };
+
+    let state = {
+      items: [],
+      sortKey: 'title',
+      sortDir: 'asc',
+      query: '',
+      status: ''
+    };
+
+    // Tracks whether the modal is in add or edit mode (used for defaults)
+    let editorMode = 'add';
+
+    const STATUS_LABEL = {
+      downloaded: 'Scaricato',
+      downloading: 'In download',
+      todo: 'Da scaricare'
+    };
+
+    function nowISO(){
+      return new Date().toISOString();
+    }
+
+    function uid(){
+      // compact unique-ish id
+      return (crypto?.randomUUID?.() || (Date.now().toString(36) + Math.random().toString(36).slice(2))).replace(/-/g,'');
+    }
+
+    function load(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        // Seed with your current memory items (you can delete them later)
+        state.items = [
+          {
+            id: uid(),
+            title: 'Underworld (saga)',
+            status: 'downloading',
+            torrent: '',
+            streaming: '',
+            notes: 'Qualità attuale scadente: riscaricare tutta la saga.',
+            updatedAt: nowISO()
+          },
+          {
+            id: uid(),
+            title: 'Cloud Atlas',
+            status: 'todo',
+            torrent: '',
+            streaming: '',
+            notes: 'Aggiunto alla lista.',
+            updatedAt: nowISO()
+          }
+        ];
+        persist();
+      } else {
+        try{
+          state.items = JSON.parse(raw) || [];
+        }catch{
+          state.items = [];
+        }
+      }
+    }
+
+    function persist(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+    }
+
+    function normalize(s){
+      return (s || '').toString().trim();
+    }
+
+    function parseLinks(text){
+      const t = normalize(text);
+      if (!t) return [];
+      return t
+        .split(/[\s,;]+/)
+        .map(x => x.trim())
+        .filter(Boolean)
+        .map(x => {
+          if (/^magnet:\?/i.test(x)) return { href: x, label: 'magnet' };
+          if (!/^https?:\/\//i.test(x)) return { href: 'https://' + x, label: x };
+          return { href: x, label: x };
+        });
+    }
+
+    function fmtDate(iso){
+      try{
+        const d = new Date(iso);
+        return d.toLocaleString(undefined, { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+      }catch{return ''}
+    }
+
+    function compare(a,b,key){
+      const av = (a?.[key] ?? '');
+      const bv = (b?.[key] ?? '');
+      // dates
+      if (key === 'updatedAt') {
+        return new Date(av).getTime() - new Date(bv).getTime();
+      }
+      // status ordering: downloaded > downloading > todo
+      if (key === 'status') {
+        const order = { downloaded: 3, downloading: 2, todo: 1 };
+        return (order[av] || 0) - (order[bv] || 0);
+      }
+      return av.toString().localeCompare(bv.toString(), undefined, { sensitivity:'base' });
+    }
+
+    function getFilteredSorted(){
+      const q = normalize(state.query).toLowerCase();
+      const st = state.status;
+
+      let rows = [...state.items];
+
+      if (st) rows = rows.filter(x => x.status === st);
+
+      if (q) {
+        rows = rows.filter(x => {
+          const hay = [x.title, x.torrent, x.streaming, x.notes].join(' ').toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      rows.sort((a,b) => {
+        const c = compare(a,b,state.sortKey);
+        return state.sortDir === 'asc' ? c : -c;
+      });
+
+      return rows;
+    }
+
+    function statusPill(status){
+      const cls = status === 'downloaded' ? 's-downloaded'
+        : status === 'downloading' ? 's-downloading'
+        : 's-todo';
+      return `<span class="pill ${cls}"><span class="dot"></span>${STATUS_LABEL[status] || status}</span>`;
+    }
+
+    function safeText(s){
+      return (s ?? '').toString()
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#039;');
+    }
+
+    function renderLinksCell(text){
+      const links = parseLinks(text);
+      if (!links.length) return '';
+      const parts = links.map(l => {
+        const label = l.label === 'magnet' ? 'magnet' : l.label;
+        return `<div><a href="${safeText(l.href)}" target="_blank" rel="noopener">${safeText(label)}</a></div>`;
+      });
+      return parts.join('');
+    }
+
+    function render(){
+      const rows = getFilteredSorted();
+
+      els.countLabel.textContent = `${rows.length} element${rows.length === 1 ? 'o' : 'i'}`;
+      const arrow = state.sortDir === 'asc' ? '↑' : '↓';
+      const label = {
+        title:'titolo', status:'stato', torrent:'torrent', streaming:'streaming', notes:'note', updatedAt:'aggiornato'
+      }[state.sortKey] || state.sortKey;
+      els.sortLabel.textContent = `Ordine: ${label} ${arrow}`;
+
+      // empty
+      els.empty.style.display = rows.length ? 'none' : 'block';
+
+      // desktop table
+      els.tbody.innerHTML = rows.map(item => {
+        return `
+          <tr>
+            <td><b>${safeText(item.title)}</b></td>
+            <td>${statusPill(item.status)}</td>
+            <td>${renderLinksCell(item.torrent)}</td>
+            <td>${renderLinksCell(item.streaming)}</td>
+            <td>${safeText(item.notes || '')}</td>
+            <td><span class="mono">${safeText(fmtDate(item.updatedAt))}</span></td>
+            <td>
+              <div class="actions">
+                <button class="btn" data-action="edit" data-id="${item.id}" type="button">✏️ Modifica</button>
+                <button class="btn danger" data-action="del" data-id="${item.id}" type="button">🗑️ Elimina</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // mobile cards
+      els.mobileList.innerHTML = rows.map(item => {
+        const tlinks = parseLinks(item.torrent);
+        const slinks = parseLinks(item.streaming);
+        const torrentHtml = tlinks.length ? tlinks.map(l => `<a href="${safeText(l.href)}" target="_blank" rel="noopener">${safeText(l.label)}</a>`).join(' · ') : '<span class="small">—</span>';
+        const streamHtml  = slinks.length ? slinks.map(l => `<a href="${safeText(l.href)}" target="_blank" rel="noopener">${safeText(l.label)}</a>`).join(' · ') : '<span class="small">—</span>';
+
+        return `
+          <div class="mItem">
+            <div class="mRow">
+              <div>
+                <p class="mTitle">${safeText(item.title)}</p>
+                <div style="margin-top:6px">${statusPill(item.status)}</div>
+                <div class="mMeta">
+                  <div><b>Torrent:</b> ${torrentHtml}</div>
+                  <div style="margin-top:6px"><b>Streaming:</b> ${streamHtml}</div>
+                  ${item.notes ? `<div style="margin-top:6px"><b>Note:</b> ${safeText(item.notes)}</div>` : ''}
+                  <div style="margin-top:8px" class="mono">${safeText(fmtDate(item.updatedAt))}</div>
+                </div>
+              </div>
+              <div class="actions">
+                <button class="btn" data-action="edit" data-id="${item.id}" type="button">✏️</button>
+                <button class="btn danger" data-action="del" data-id="${item.id}" type="button">🗑️</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // update sort UI
+      document.querySelectorAll('thead th[data-key]').forEach(th => {
+        const key = th.getAttribute('data-key');
+        th.classList.toggle('sorting', key === state.sortKey);
+        const base = {
+          title:'Titolo', status:'Stato', torrent:'Torrent', streaming:'Streaming', notes:'Note', updatedAt:'Aggiornato'
+        }[key] || key;
+        th.textContent = key === state.sortKey ? `${base} ${state.sortDir === 'asc' ? '↑' : '↓'}` : base;
+      });
+    }
+
+    function openModal(mode, item){
+      editorMode = mode;
+      const isEdit = mode === 'edit';
+
+      els.modalTitle.textContent = isEdit ? 'Modifica film' : 'Aggiungi film';
+
+      els.id.value = isEdit ? (item?.id || '') : '';
+      els.title.value = isEdit ? (item?.title || '') : '';
+      els.status.value = isEdit ? (item?.status || 'todo') : 'todo';
+
+      // Defaults when adding a new title
+      els.torrent.value = isEdit ? (item?.torrent || '') : 'da verificare';
+      els.streaming.value = isEdit ? (item?.streaming || '') : '--';
+      els.notes.value = isEdit ? (item?.notes || '') : '';
+
+      els.editor.showModal();
+      setTimeout(() => els.title.focus(), 50);
+    }
+
+    function closeModal(){
+      els.editor.close();
+      els.form.reset();
+      els.id.value = '';
+    }
+
+    function upsertFromForm(){
+      const title = normalize(els.title.value);
+      if (!title) {
+        els.title.focus();
+        return;
+      }
+
+      let torrent = normalize(els.torrent.value);
+      let streaming = normalize(els.streaming.value);
+
+      // Apply defaults ONLY when adding
+      if (editorMode !== 'edit') {
+        if (!torrent) torrent = 'da verificare';
+        if (!streaming) streaming = '--';
+      }
+
+      const item = {
+        id: els.id.value || uid(),
+        title,
+        status: els.status.value,
+        torrent,
+        streaming,
+        notes: normalize(els.notes.value),
+        updatedAt: nowISO()
+      };
+
+      const i = state.items.findIndex(x => x.id === item.id);
+      if (i >= 0) state.items[i] = item;
+      else state.items.push(item);
+
+      persist();
+      closeModal();
+      render();
+    }
+
+    function remove(id){
+      const item = state.items.find(x => x.id === id);
+      if (!item) return;
+      const ok = confirm(`Eliminare “${item.title}”?`);
+      if (!ok) return;
+
+      state.items = state.items.filter(x => x.id !== id);
+      persist();
+      render();
+    }
+
+    function setSort(key){
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sortKey = key;
+        state.sortDir = 'asc';
+      }
+      render();
+    }
+
+    function exportJSON(){
+      const blob = new Blob([JSON.stringify(state.items, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `film-list-${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJSONFile(file){
+      const reader = new FileReader();
+      reader.onload = () => {
+        try{
+          const data = JSON.parse(reader.result);
+          if (!Array.isArray(data)) throw new Error('Formato non valido');
+
+          // minimal validation + normalize
+          const cleaned = data
+            .filter(x => x && typeof x === 'object')
+            .map(x => ({
+              id: normalize(x.id) || uid(),
+              title: normalize(x.title),
+              status: ['downloaded','downloading','todo'].includes(x.status) ? x.status : 'todo',
+              torrent: normalize(x.torrent),
+              streaming: normalize(x.streaming),
+              notes: normalize(x.notes),
+              updatedAt: normalize(x.updatedAt) || nowISO()
+            }))
+            .filter(x => x.title);
+
+          const ok = confirm(`Importare ${cleaned.length} elementi? (Sovrascrive la lista attuale)`);
+          if (!ok) return;
+
+          state.items = cleaned;
+          persist();
+          render();
+        }catch(e){
+          alert('Impossibile importare: JSON non valido.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Wire events
+    els.q.addEventListener('input', (e) => {
+      state.query = e.target.value;
+      render();
+    });
+
+    els.statusFilter.addEventListener('change', (e) => {
+      state.status = e.target.value;
+      render();
+    });
+
+    els.addBtn.addEventListener('click', () => openModal('add'));
+    els.closeModal.addEventListener('click', closeModal);
+    els.cancelBtn.addEventListener('click', closeModal);
+    els.saveBtn.addEventListener('click', upsertFromForm);
+
+    // Submit on Enter (desktop)
+    els.form.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.target.tagName || '').toLowerCase() !== 'textarea') {
+        e.preventDefault();
+        upsertFromForm();
+      }
+    });
+
+    document.querySelectorAll('thead th[data-key]').forEach(th => {
+      th.addEventListener('click', () => setSort(th.getAttribute('data-key')));
+    });
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const action = btn.getAttribute('data-action');
+      const id = btn.getAttribute('data-id');
+
+      if (action === 'edit') {
+        const item = state.items.find(x => x.id === id);
+        if (item) openModal('edit', item);
+      }
+      if (action === 'del') {
+        remove(id);
+      }
+    });
+
+    els.exportBtn.addEventListener('click', exportJSON);
+    els.importBtn.addEventListener('click', () => els.fileInput.click());
+    els.fileInput.addEventListener('change', () => {
+      const f = els.fileInput.files?.[0];
+      if (f) importJSONFile(f);
+      els.fileInput.value = '';
+    });
+
+    // Init
+    load();
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+[
+  {
+    "id": "22ad6e7776f84a2b8898520b109f175d",
+    "title": "Cloud Atlas",
+    "status": "todo",
+    "torrent": "Da verificare",
+    "streaming": "",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:01:34.196Z"
+  },
+  {
+    "id": "48eac7f7f6984683957873974f98de82",
+    "title": "Super 8",
+    "status": "todo",
+    "torrent": "Da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T09:58:34.791Z"
+  },
+  {
+    "id": "03029e8e711c45ee8ee4a787f528adcc",
+    "title": "Basilicata cost to cost",
+    "status": "todo",
+    "torrent": "Da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:01:06.204Z"
+  },
+  {
+    "id": "7101e03d1bbe4c95b53f149c3e7532f8",
+    "title": "Battleship",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:06:27.125Z"
+  },
+  {
+    "id": "604cd3a1281a49108bc0797185dd5bc7",
+    "title": "Basta vincere",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:06:50.504Z"
+  },
+  {
+    "id": "1335e9629f154d8cbc13814d0f353248",
+    "title": "Benvenuto presidente",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:06:57.873Z"
+  },
+  {
+    "id": "a244d803e3a94889b51e62773f93811f",
+    "title": "Bonnie e Clyde all'italiana",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:07:07.176Z"
+  },
+  {
+    "id": "ddc294578dc7417e95631a2dc6420902",
+    "title": "Cado dalle nubi",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:07:13.057Z"
+  },
+  {
+    "id": "2669ddc04af8432f809854c07bc7da37",
+    "title": "Attacco in mare aperto",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:07:20.102Z"
+  },
+  {
+    "id": "32b0f48409b14041a5574a49bc91f539",
+    "title": "cella 211",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:07:24.626Z"
+  },
+  {
+    "id": "7c56421fc87d4dd7aeda51acf3cdcf80",
+    "title": "Cinderella Man",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:07:38.952Z"
+  },
+  {
+    "id": "94becf47692d440f81b4dd350e212642",
+    "title": "Tropa de Elite 1/2",
+    "status": "todo",
+    "torrent": "Non trovato!",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:12:02.525Z"
+  },
+  {
+    "id": "5e0dd006afb84609916a21da2728eacf",
+    "title": "Una famiglia mostruosa",
+    "status": "todo",
+    "torrent": "Non trovato",
+    "streaming": "Netflix",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:12:26.362Z"
+  },
+  {
+    "id": "04f95ffc70a4477f8203636ea2b988a8",
+    "title": "Al capone",
+    "status": "downloading",
+    "torrent": "1080p",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:18:22.562Z"
+  },
+  {
+    "id": "acdb517dc7fb4937bfb5ada10fc7d6bf",
+    "title": "Inside Man",
+    "status": "downloaded",
+    "torrent": "2160p",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:37:31.265Z"
+  },
+  {
+    "id": "e188442b956f4e4b85dcdf6889791b1d",
+    "title": "Appaloosa",
+    "status": "downloaded",
+    "torrent": "1080p",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T15:05:39.208Z"
+  },
+  {
+    "id": "3aa4b67de79a458e9c3ac4f2680d4e1a",
+    "title": "L'uomo invisibile",
+    "status": "downloaded",
+    "torrent": "2160p",
+    "streaming": "--",
+    "notes": "Da trasferire",
+    "updatedAt": "2025-12-12T15:04:23.472Z"
+  },
+  {
+    "id": "c20a8ad3f96042b4b2fc221cc03af233",
+    "title": "The Nice Guys",
+    "status": "downloading",
+    "torrent": "2160p",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T10:19:24.521Z"
+  },
+  {
+    "id": "d124561395534c1fa7f561bb38d92c60",
+    "title": "The prestige",
+    "status": "downloaded",
+    "torrent": "2160p",
+    "streaming": "--",
+    "notes": "Da trasferire",
+    "updatedAt": "2025-12-12T15:04:37.299Z"
+  },
+  {
+    "id": "45d5ec8b921d483284afdf62c4f95f52",
+    "title": "Eagle eye",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T21:36:51.075Z"
+  },
+  {
+    "id": "aaaac44da8a749f3aa5b87527f05d4e6",
+    "title": "Dredd - la legge sono io",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-12T21:39:10.975Z"
+  }
+]
