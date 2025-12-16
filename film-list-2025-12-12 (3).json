@@ -205,5 +205,68 @@
     "streaming": "--",
     "notes": "Molto basso, circa 1.5 giga. Da verificare una volta scaricato",
     "updatedAt": "2025-12-15T16:19:19.332Z"
+  },
+  {
+    "id": "d51ed87e93a5497b9280a73c22bda51b",
+    "title": "Lionheart",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-15T22:30:36.779Z"
+  },
+  {
+    "id": "3a040db04a0f4885888b7abc1a6b9835",
+    "title": "L'avvocato del diavolo",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-15T22:33:16.132Z"
+  },
+  {
+    "id": "7ada4aab860b43b085e0ac016768a9c3",
+    "title": "La figlia del generale",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-15T22:36:53.836Z"
+  },
+  {
+    "id": "848729eea4f94845bae6e14c66680e6f",
+    "title": "Megamind",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-15T22:39:27.264Z"
+  },
+  {
+    "id": "3037585aa6ef4c7392ef8db96a98c641",
+    "title": "Jhon Rambo",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-16T00:35:24.544Z"
+  },
+  {
+    "id": "b568f3a51abe4afd93a1c69258f60d91",
+    "title": "L'abbiamo fatta grossa",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-16T00:35:55.564Z"
+  },
+  {
+    "id": "02ec0debecd748a3b6ee430a655e9c58",
+    "title": "Trappola criminale",
+    "status": "todo",
+    "torrent": "da verificare",
+    "streaming": "--",
+    "notes": "",
+    "updatedAt": "2025-12-16T00:36:34.220Z"
   }
 ]
